@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cadence — Habit Tracker and Heatmap</title>
+<meta name="description" content="A warm, local-first habit tracker with a twelve-week heatmap, streak analytics, weekday insights and a fourteen-day chart.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600&family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="app">
+  <header class="topbar">
+    <div class="brand">
+      <span class="mark">C</span>
+      <div>
+        <strong>Cadence</strong>
+        <small>Small things, kept</small>
+      </div>
+    </div>
+    <div class="top-actions">
+      <span class="today" id="today-label">Monday, 20 October</span>
+      <button id="add-habit" class="primary" type="button">+ New habit</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div>
+        <p class="eyebrow">A record of showing up</p>
+        <h1>Keep the <em>rhythm.</em></h1>
+        <p class="lede">A quiet place to mark the days. No accounts, no streaks to protect at all costs — just a record you can read.</p>
+      </div>
+      <div class="summary" id="summary"></div>
+    </section>
+
+    <div class="workspace">
+      <section class="habits-panel">
+        <div class="panel-head">
+          <div>
+            <span class="panel-kicker">Habits</span>
+            <span class="panel-title">The daily practice</span>
+          </div>
+          <div class="range" id="range">
+            <button data-weeks="8" type="button">8w</button>
+            <button data-weeks="12" class="active" type="button">12w</button>
+            <button data-weeks="16" type="button">16w</button>
+          </div>
+        </div>
+        <div class="weekday-labels" id="weekday-labels"></div>
+        <div class="habits" id="habits"></div>
+        <div class="legend">
+          <span>Less</span><i class="legend-cell"></i><i class="legend-cell mid"></i><i class="legend-cell full"></i><span>More</span>
+          <span class="legend-note">Click any square to mark a day. Future days stay empty.</span>
+        </div>
+      </section>
+
+      <aside class="insights">
+        <div class="insight-card chart-card">
+          <div class="card-head"><span>Last 14 days</span><span id="chart-total">0 checks</span></div>
+          <div class="bar-chart" id="bar-chart"></div>
+          <div class="chart-axis"><span>14 days ago</span><span>Today</span></div>
+        </div>
+        <div class="insight-card weekday-card">
+          <div class="card-head"><span>By weekday</span><span>12 weeks</span></div>
+          <div id="weekday-chart" class="weekday-chart"></div>
+        </div>
+        <div class="insight-card note-card">
+          <span class="card-head"><span>Pattern</span><span>01</span></span>
+          <p id="pattern-text">Mark a few days and a pattern will start to appear here.</p>
+          <span class="pattern-tag" id="pattern-tag">Keep going</span>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <footer>
+    <span>Cadence / stored in this browser</span>
+    <span id="year"></span>
+  </footer>
+</div>
+
+<dialog id="habit-dialog" class="dialog">
+  <form id="habit-form" method="dialog">
+    <div class="dialog-head">
+      <div>
+        <span class="panel-kicker">New habit</span>
+        <h2>What will you keep?</h2>
+      </div>
+      <button id="dialog-close" type="button" class="close" aria-label="Close">×</button>
+    </div>
+    <label class="field">Name
+      <input id="habit-name" type="text" maxlength="32" placeholder="Read ten pages" required autocomplete="off">
+    </label>
+    <div class="field-row">
+      <label class="field">Emoji
+        <select id="habit-emoji">
+          <option>✦</option><option>✎</option><option>◒</option><option>☼</option><option>⌁</option><option>❋</option><option>◍</option><option>⌂</option>
+        </select>
+      </label>
+      <label class="field">Colour
+        <span class="color-choices" id="color-choices"></span>
+      </label>
+    </div>
+    <button class="primary wide" type="submit">Create habit</button>
+  </form>
+</dialog>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script src="app.js"></script>
+</body>
+</html>
